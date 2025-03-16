@@ -16,7 +16,9 @@
     display: flex;
     padding: 20px 0;
     background: #004168;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
 }
 
 .toolbar-contact ul {
@@ -105,13 +107,15 @@
     background: #6FBCE9 !important;
     padding: 5px 10px !important;
     height: auto;
+    border-radius: 5px;
 }
 
 .menu-item-has-children::before {
     content: "▾";
     position: absolute;
     right: 0;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%)
 }
 
 .solution-menu-children {
@@ -155,6 +159,7 @@
 .footer-section {
     color: white !important;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 10px 30px;
     background: #00537A;
@@ -163,11 +168,85 @@
 .footer-container {
     display: flex;
     max-width: 1500px;
+    padding-bottom: 20px;
 }
 
 .footer-box {
     width: 33.333%;
     padding-right: 30px;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: #00537A;
+    border-top: 1px solid #fff;
+    padding: 5px;
+}
+
+.footer-bottom .container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1500px;
+}
+
+.footer-bottom .footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+}
+
+.footer-bottom .left{
+    display: flex;
+    align-items: center;
+}
+
+.footer-bottom .right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.footer-bottom .right a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.social-links{
+    list-style: none;
+    display: flex;
+    padding: 0;
+    gap: 10px;
+}
+
+.social-links li {
+    display: inline-block;
+}
+
+.social-links li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    color: white; 
+    text-decoration: none;
+}
+
+.social-links li a i {
+    font-size: 20px; 
+}
+
+.social-links li a.facebook {
+    background-color: #1778f2; 
+}
+
+.social-links li a.linkedin {
+    background-color: #0d66c2; 
 }
 
 .footer-box-title {
@@ -226,6 +305,14 @@
 
 .sitemap-section ul li ul li {
     padding-left: 20px;
+}
+
+#so{
+    color: #ffffff;
+    background: #6FBCE9; 
+    padding: 5px 10px; 
+    height: auto;
+    border-radius: 10px;
 }
 
 /* RESPONSIVE - Header/Footer Specific */
