@@ -8,6 +8,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f8f9fa;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .site {
@@ -22,6 +24,8 @@ body {
     padding: 20px;
     justify-content: space-around;
     scrollbar-gutter: stable;
+    width: 100%;
+    max-width: 1200px;
 }
 
 ul {

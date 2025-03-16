@@ -66,6 +66,7 @@
 .logo-area img {
     width: 15rem;
     height: auto;
+    max-width: 100%;
 }
 
 /* Menu Styling */
@@ -161,19 +162,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px 30px;
+    align-items: center;
+    padding: 42px 30px;
     background: #00537A;
 }
 
 .footer-container {
     display: flex;
-    max-width: 1500px;
+    max-width: 1200px;
+    width: 90%;
     padding-bottom: 20px;
+    justify-content: center;
 }
 
 .footer-box {
     width: 33.333%;
     padding-right: 30px;
+    text-align: left;
 }
 
 .footer-bottom {
@@ -316,28 +321,61 @@
 }
 
 /* RESPONSIVE - Header/Footer Specific */
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
+
+    .menu-area{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .toolbar-contact{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .toolbar-contact ul{
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .quote-button{
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    #primary-menu{
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #ffffff;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 10px;
+    }
+
+    #primary-menu.active{
+        display: flex;
+    }
+
+    #primary-menu li{
+        width:100%;
+        text-align: center;
+    }
+
     .menu-toggle {
         display: block;
         font-size: 30px;
         cursor: pointer;
-    }
-
-    .navbar-collapse.active {
-        display: block;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background-color: #fff;
-        width: 100%;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .menu-toggle {
-        display: block;
-        color: #333;
-        font-size: 30px;
+        color: #ffffff;
         margin-right: 20px;
+        margin-left: 15px;
+        background-color: #00537A;
+        border-radius: 2.5px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .navbar-collapse.active {
@@ -348,18 +386,27 @@
         background-color: #fff;
         width: 100%;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    #primary-menu {
-        flex-direction: column;
-    }
-
-    #primary-menu li {
-        margin: 10px 0;
     }
 
     .sub-menu {
         position: static;
         box-shadow: none;
+    }
+
+    .footer-container{
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-box{
+        width: 100%;
+        padding-left: 10px;
+        margin-bottom: 20px;
+    }
+
+    .footer-bottom .container {
+        flex-direction: column;
+        text-align: center;
     }
 }
