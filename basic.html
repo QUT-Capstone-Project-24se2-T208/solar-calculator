@@ -32,6 +32,7 @@
                 </div>
 
                 <div class="container container-large">
+                    <div class="top-row">
                     <!-- Section 1: Results -->
                     <section id="section1">
                         <div class="card-header">System & Battery Results</div>
@@ -210,8 +211,37 @@
                                 </div>
                             </div>
                         </div>
-                    </section>        
 
+                    </section>    
+                    </div>  
+                     <!-- File Upload -->
+                      <div class="bot-row">
+                    <section id="upload-roof-structure" style="margin-top: 20px;">
+                        <div class="card">
+                          <div class="card-header">Upload your Roof Structure</div>
+                          <div class="upload-box">
+                            <div class="upload-area">
+                              <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                              <p>Drag your file(s) to start uploading</p>
+                              <p>OR</p>
+                              <label class="upload-label">
+                                <input type="file" multiple />
+                                <span class="browse-button">Browse Files</span>
+                              </label>
+                              <small>Only supports .png, .jpg, .heic & .pdf files</small>
+                            </div>
+                            <form class="upload-form">
+                              <input type="text" placeholder="Name" required>
+                              <input type="email" placeholder="Email" required>
+                              <input type="text" placeholder="Phone Number">
+                              <input type="text" placeholder="Your Website">
+                              <textarea placeholder="Your Message Here"></textarea>
+                              <button type="submit">Send</button>
+                            </form>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
                 </div><!-- .container -->
             </main><!-- #main -->
         </div><!-- #primary -->
