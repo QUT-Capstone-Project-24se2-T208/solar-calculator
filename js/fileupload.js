@@ -17,6 +17,28 @@ const initApp = () => {
   });
 
   droparea.addEventListener("drop", handleDrop);
+
+  const fileInput = document.querySelector("input[type='file']");
+  if (fileInput) {
+    fileInput.addEventListener("change", function () {
+      const selected = Array.from(this.files);
+      selected.forEach((file) => {
+        const fileSizeMB = file.size / (1024 * 1024);
+        const isValidType = ALLOWED_TYPES.includes(file.type);
+        const isValidSize = fileSizeMB <= MAX_FILE_SIZE_MB;
+        const alreadyAdded = droppedFiles.some(
+          (f) => f.name === file.name && f.size === file.size
+        );
+  
+        if (isValidType && isValidSize && !alreadyAdded) {
+          droppedFiles.push(file);
+          console.log(`File accepted from input: ${file.name}`);
+        }
+      });
+  
+      updateFileStatus();
+    });
+  }
 };
 
 document.addEventListener("DOMContentLoaded", initApp);
@@ -29,6 +51,11 @@ const ALLOWED_TYPES = [
   "image/heic",
   "image/jpg",
 ];
+const updateFileStatus = () => {
+  const counter = document.getElementById("file-counter");
+  if (!counter) return;
+  counter.textContent = `Attached Files: ${droppedFiles.length}`;
+}
 
 let droppedFiles = [];
 
@@ -38,24 +65,35 @@ const handleDrop = (e) => {
   const files = dt.files;
   const fileArray = [...files];
 
-  droppedFiles =[];
-
   fileArray.forEach((file) => {
-    if (!ALLOWED_TYPES.includes(file.type)) {
+    const fileSizeMB = file.size / (1024 * 1024); // Convert bytes to MB
+    const isValidFormat = ALLOWED_TYPES.includes(file.type);
+    const isValidSize = fileSizeMB <= MAX_FILE_SIZE_MB;
+
+    const alreadyAdded = droppedFiles.some((f) => f.name === file.name && f.size === file.size);
+
+    if (!isValidFormat) {
       alert(`Invalid file type: ${file.name}`);
       return;
     }
 
-    const fileSizeMB = file.size / (1024 * 1024); // Convert bytes to MB
-    if (fileSizeMB > MAX_FILE_SIZE_MB) {
+   
+    if (!isValidSize) {
       alert(`${file.name} exceeds the maximum size of ${MAX_FILE_SIZE_MB} MB`);
       return;
     }
 
-    console.log(`File accepted: ${file.name}`);
+    if (!alreadyAdded){
+      droppedFiles.push(file);
+      console.log(`File accepted: ${file.name}`);
+    } else {
+      console.log(`File already added: ${file.name}`);
+    }
 
-    console.log(files); // List version
-    console.log(fileArray); // Array version
+    updateFileStatus(); 
+
+    console.log(files); // List version REMOVE AFTER TESTING
+    console.log(fileArray); // Array version REMOVE AFTER TESTING
   });
 };
 
@@ -101,7 +139,7 @@ document.querySelector(".upload-form").addEventListener("submit", async (e) => {
     form.reset();
     droppedFiles = [];
   } catch (err) {
-    alert("❌ Failed to send email.");
+    alert("Failed to send email.");
     console.error(err);
   }
 });

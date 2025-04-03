@@ -47,13 +47,13 @@ app.post("/send-quote", upload.array("files"), async (req, res) => {
 
   try {
     await transporter.sendMail(mailOptions);
-    res.status(200).send("✅ Email sent successfully");
+    res.status(200).send("Email sent successfully");
   } catch (error) {
     console.error("Email send error:", error);
-    res.status(500).send("❌ Failed to send email");
+    res.status(500).send("Failed to send email");
   }
 });
 
 app.listen(port, () => {
-  console.log(`🚀 Server listening on http://localhost:${port}`);
+  console.log(`Server listening on http://localhost:${port}`);
 });
