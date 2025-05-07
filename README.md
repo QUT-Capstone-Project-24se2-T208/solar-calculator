@@ -1,6 +1,7 @@
 # Solar Calculator
 
 A comprehensive web-based tool for calculating solar energy system requirements for homes and businesses.
+Live demo available at https://solar-calculator-chi.vercel.app/
 
 ## Overview
 
