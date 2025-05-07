@@ -20,7 +20,8 @@
   <!-- Project Styles -->
   <link rel="stylesheet" href="css/header-footer.css" />
   <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="/css/advanced-calculator.css" />
+  <link rel="stylesheet" href="css/advanced-calculator.css" />
+  <link rel="stylesheet" href="css/advanced-quote-request.css">
 </head>
 
 <body>
@@ -36,7 +37,43 @@
   </div>
 
   <div class="title">
-    <h1>Solar Calculator - Advanced Mode</h1>
+    <h1>Solar Calculator - Advanced</h1>
+    <p class="subtitle">For professionals and enthusiasts who need detailed calculations and want to fine-tune every parameter.</p>
+  </div>
+
+  <!-- Home Button -->
+  <div class="home-button-container">
+    <a href="index.html" class="home-button">
+      <i class="fas fa-home"></i> <span>Back to Home</span>
+    </a>
+  </div>
+
+  <!-- Tutorial Button -->
+  <button class="open-tutorial-btn" id="openTutorialBtn" style="display: none;">
+    <i class="fas fa-play-circle"></i>
+  </button>
+
+  <!-- Video Tutorial Popup -->
+  <div class="tutorial-overlay advanced-mode" id="tutorialOverlay" style="display: none;">
+    <div class="tutorial-container">
+      <div class="tutorial-header">
+        <h3>How to Use the Advanced Calculator</h3>
+        <button class="tutorial-close" id="closeTutorialBtn">&times;</button>
+      </div>
+      <div class="tutorial-content">
+        <!-- Replace with actual YouTube video ID -->
+        <iframe id="tutorialVideo" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="tutorial-footer">
+        <div class="checkbox-container">
+          <input type="checkbox" id="dontShowAgain">
+          <label for="dontShowAgain">Don't show this tutorial again</label>
+        </div>
+        <button class="tutorial-button" id="gotItBtn">
+          <i class="fas fa-check"></i> Got it!
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="mode-switch-container">
@@ -99,6 +136,7 @@
             </div>
             
             <div class="step-action">
+              <button disabled='disabled' style="opacity: 0;"></button>
               <button class="next-btn">Next Step</button>
             </div>
           </div>
@@ -142,6 +180,31 @@
                     <button class="category-btn" data-category="other">Other</button>
                   </div>
                 </div>
+
+                <div class="add-custom-appliance-section">
+                  <button id="add-custom-appliance" class="toggle-btn">
+                    <i class="fas fa-plus-circle"></i> Add Custom Appliance
+                  </button>
+                  <div class="custom-appliance-form" style="display: none;">
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label for="custom-appliance-name">Appliance Name</label>
+                        <input type="text" id="custom-appliance-name" placeholder="e.g., Home Theater">
+                      </div>
+                      <div class="form-group">
+                        <label for="custom-appliance-wattage">Wattage (W)</label>
+                        <input type="number" id="custom-appliance-wattage" min="1" value="100">
+                      </div>
+                      <div class="form-group">
+                        <label for="custom-appliance-hours">Hours/Day</label>
+                        <input type="number" id="custom-appliance-hours" min="0.1" max="24" step="0.1" value="2">
+                      </div>
+                    </div>
+                    <button id="save-custom-appliance" class="appliance-button">
+                      <i class="fas fa-save"></i> Add to Selection
+                    </button>
+                  </div>
+                </div>
                 
                 <div class="appliance-grid" id="appliance-grid">
                   <!-- Appliances will be dynamically loaded here -->
@@ -152,11 +215,11 @@
                   <div id="selected-appliances-list"></div>
                   <div class="usage-summary">
                     <div>Total Daily Usage: <span id="total-daily-usage">0</span> kWh</div>
-                    <div>Estimated Monthly Bill: <span id="currency-symbol-bill">$</span><span id="estimated-monthly-bill">0</span></div>
+                    <div style="display: none;">Estimated Monthly Bill: <span id="currency-symbol-bill">$</span><span id="estimated-monthly-bill">0</span></div>
                   </div>
                 </div>
                 
-                <button id="apply-appliance-usage" class="next-btn">Apply to Daily Usage</button>
+                <button id="apply-appliance-usage" class="appliance-button">Apply to Daily Usage</button>
               </div>
             </div>
             
@@ -278,18 +341,19 @@
             <div class="result-card">
               <div class="tooltip-container" data-tooltip="The total amount of electricity your solar system is expected to generate in a year.">
                 <h3>Estimated Annual Output</h3>
-                <p><span id="annual-output">0</span> kWh/year</p>
+                <p><span id="annual-output">0</span>kWh/year</p>
                 <small id="daily-average-output">0 kWh/day</small>
               </div>
               <div class="tooltip-container" data-tooltip="Your estimated monthly savings on electricity bills based on your current rates.">
-                <h3>Monthly Savings</h3>
+                <h3>
+                  <i class="fas fa-info-circle"></i> Monthly Savings</h3>
                 <div class="savings-display">
                   <div class="primary-currency">
                     <span id="country-flag" class="country-flag"></span>
                     <span id="currency-symbol-result">$</span><span id="monthly-savings">0</span>
                   </div>
                   <div class="converted-currency" id="converted-savings-container">
-                    <span>(AUD $<span id="converted-savings">0</span>)</span>
+                    <span>(AUD $<span id="converted-savings">0</span>/ AUD $<span id="converted-yearly-savings">0</span>)</span>
                   </div>
                 </div>
                 <small id="annual-savings">0 per year</small>
@@ -305,6 +369,11 @@
                 <small id="performance-ratio">Performance ratio: 0</small>
               </div>
             </div>
+
+            <div class="savings-disclaimer">
+              <i class="fas fa-info-circle"></i> 
+              Savings estimates vary based on electricity rates, local policies, seasonal changes, and utility billing practices.
+            </div>
             
             <!-- Monthly production chart -->
             <div class="results-section">
@@ -316,86 +385,34 @@
             
             <!-- Hourly power output profiles -->
             <div class="results-section">
-              <h4>Average Hourly Profiles</h4>
-              <p class="subtitle">Total photovoltaic power output [Wh]</p>
+              <h4>Average Hourly Profile</h4>
+              <p class="subtitle">Photovoltaic power output throughout the day [Wh]</p>
               
-              <div class="hourly-profiles-grid">
-                <!-- 12 months grid -->
-                <div class="hourly-profile-month" id="jan-profile">
-                  <div class="month-label">Jan</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="0"></canvas>
-                  </div>
+              <div class="hourly-charts-container">
+                <div class="month-selector-container">
+                  <label for="month-selector">Select Month:</label>
+                  <select id="month-selector">
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                  </select>
                 </div>
-                <div class="hourly-profile-month" id="feb-profile">
-                  <div class="month-label">Feb</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="1"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="mar-profile">
-                  <div class="month-label">Mar</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="2"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="apr-profile">
-                  <div class="month-label">Apr</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="3"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="may-profile">
-                  <div class="month-label">May</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="4"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="jun-profile">
-                  <div class="month-label">Jun</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="5"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="jul-profile">
-                  <div class="month-label">Jul</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="6"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="aug-profile">
-                  <div class="month-label">Aug</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="7"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="sep-profile">
-                  <div class="month-label">Sep</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="8"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="oct-profile">
-                  <div class="month-label">Oct</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="9"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="nov-profile">
-                  <div class="month-label">Nov</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="10"></canvas>
-                  </div>
-                </div>
-                <div class="hourly-profile-month" id="dec-profile">
-                  <div class="month-label">Dec</div>
-                  <div class="hourly-chart-container">
-                    <canvas class="hourly-chart" data-month="11"></canvas>
-                  </div>
+                
+                <div class="unified-chart-container">
+                  <canvas id="unified-hourly-chart"></canvas>
                 </div>
               </div>
               
-              <div class="timezone-info">UTC+09</div>
+              <div class="timezone-info">local timezone</div>
             </div>
             
             <!-- Technical details section with tooltips -->
@@ -478,12 +495,11 @@
             <!-- Export options -->
             <div class="results-actions">
               <button id="export-pdf" class="action-btn"><i class="fas fa-file-pdf"></i> Export as PDF</button>
-              <button id="share-results" class="action-btn"><i class="fas fa-share-alt"></i> Share Results</button>
             </div>
             
             <div class="step-action">
               <button class="prev-btn">Previous Step</button>
-              <button id="reset-defaults" class="prev-btn">Request a Quote</button>
+              <button class="home-btn" onclick="location.href='advanced.html'">Back to the First Step</button>
             </div>
           </div>
         </div>
@@ -495,6 +511,8 @@
   <div id="footer-placeholder"></div>
 
   <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>  
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -502,6 +520,8 @@
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>
   <script src="js/layout.js" defer></script>
-  <script src="/js/advanced-calculator.js" defer></script>
+  <script src="js/appliance.js"></script>
+  <script src="js/advanced-calculator.js" defer></script>
+  <script src="js/advanced-quote-request.js" defer></script>
 </body>
 </html>

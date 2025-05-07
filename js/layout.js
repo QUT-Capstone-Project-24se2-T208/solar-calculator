@@ -279,3 +279,161 @@ function initializeHeaderMenu() {
     }
   });
 }
+
+// Video Tutorial Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Tutorial video configuration - Configure separate video IDs for mobile and desktop
+  const tutorialVideos = {
+    simple: {
+      mobile: "lhw5YGYhxis", // Simple mode tutorial for mobile (replace with actual ID)
+      desktop: "BxT49DV04SE"  // Simple mode tutorial for desktop (replace with actual ID)
+    },
+    basic: {
+      mobile: "Rt-xUpBdr-g",  // Basic mode tutorial for mobile (replace with actual ID)
+      desktop: "7eBTbo7CIUk"   // Basic mode tutorial for desktop (replace with actual ID)
+    },
+    advanced: {
+      mobile: "qdiyx_YE6RI", // No tutorial video for advanced mode
+      desktop: "ojDNI-vvPHs"
+    }
+  };
+
+  // Determine which calculator page we're on
+  const isSimplePage = window.location.pathname.includes("simple.html");
+  const isBasicPage = window.location.pathname.includes("basic.html");
+  const isAdvancedPage = window.location.pathname.includes("advanced.html");
+  
+  // Elements
+  const tutorialOverlay = document.getElementById('tutorialOverlay');
+  const tutorialVideo = document.getElementById('tutorialVideo');
+  const openTutorialBtn = document.getElementById('openTutorialBtn');
+  const closeTutorialBtn = document.getElementById('closeTutorialBtn');
+  const gotItBtn = document.getElementById('gotItBtn');
+  const dontShowAgain = document.getElementById('dontShowAgain');
+  
+  // Only proceed if we're on a calculator page with tutorial elements
+  if (tutorialOverlay && tutorialVideo && openTutorialBtn) {
+    // Enable tutorial for all modes including advanced mode
+    if (isAdvancedPage) {
+      // Make sure the tutorial button and overlay are visible in advanced mode
+      openTutorialBtn.style.display = 'flex';
+      tutorialOverlay.style.display = 'flex';
+    }
+    
+    // Select mobile or desktop video based on screen size
+    let isMobile = window.innerWidth <= 768;
+    let videoType = isMobile ? 'mobile' : 'desktop';
+    let videoId;
+    let storageKey = '';
+    
+    if (isSimplePage) {
+      videoId = tutorialVideos.simple[videoType];
+      storageKey = 'simpleTutorialShown';
+    } else if (isBasicPage) {
+      videoId = tutorialVideos.basic[videoType];
+      storageKey = 'basicTutorialShown';
+    } else if (isAdvancedPage) {
+      videoId = tutorialVideos.advanced[videoType];
+      storageKey = 'advancedTutorialShown';
+    }
+    
+    // Update video ID when screen size changes
+    window.addEventListener('resize', function() {
+      const newIsMobile = window.innerWidth <= 768;
+      if (newIsMobile !== isMobile) {
+        isMobile = newIsMobile;
+        videoType = isMobile ? 'mobile' : 'desktop';
+        
+        if (isSimplePage) {
+          videoId = tutorialVideos.simple[videoType];
+        } else if (isBasicPage) {
+          videoId = tutorialVideos.basic[videoType];
+        } else if (isAdvancedPage) {
+          videoId = tutorialVideos.advanced[videoType];
+        }
+        
+        // Reload video if tutorial is active when screen size changes
+        if (tutorialOverlay.classList.contains('active')) {
+          loadVideo();
+        }
+      }
+    });
+    
+    // Add tooltip to open tutorial button
+    const tooltipSpan = document.createElement('span');
+    tooltipSpan.classList.add('tutorial-tooltip');
+    tooltipSpan.textContent = 'View Tutorial';
+    openTutorialBtn.appendChild(tooltipSpan);
+    
+    // Function to load the YouTube video
+    const loadVideo = () => {
+      if (videoId) {
+        tutorialVideo.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&modestbranding=1&showinfo=0&controls=1`;
+      } else {
+        tutorialVideo.src = 'about:blank';
+        console.warn('No tutorial video ID available for this mode and device type');
+      }
+    };
+    
+    // Function to show the tutorial popup
+    const showTutorial = () => {
+      if (videoId) {
+        tutorialOverlay.classList.add('active');
+        loadVideo();
+      } else {
+        console.warn('Cannot show tutorial - no video ID available');
+      }
+    };
+    
+    // Function to hide the tutorial popup
+    const hideTutorial = () => {
+      tutorialOverlay.classList.remove('active');
+      tutorialVideo.src = 'about:blank'; // Stop the video
+    };
+    
+    // Function to save tutorial preferences
+    const saveTutorialPreference = () => {
+      if (dontShowAgain && dontShowAgain.checked) {
+        localStorage.setItem(storageKey, 'true');
+      }
+    };
+    
+    // Event Listeners
+    openTutorialBtn.addEventListener('click', showTutorial);
+    
+    closeTutorialBtn.addEventListener('click', () => {
+      saveTutorialPreference();
+      hideTutorial();
+    });
+    
+    gotItBtn.addEventListener('click', () => {
+      saveTutorialPreference();
+      hideTutorial();
+    });
+    
+    // Add direct event listener for checkbox
+    if (dontShowAgain) {
+      dontShowAgain.addEventListener('change', function() {
+        if (this.checked) {
+          localStorage.setItem(storageKey, 'true');
+        } else {
+          localStorage.removeItem(storageKey);
+        }
+      });
+    }
+    
+    // Close when clicking outside the tutorial container
+    tutorialOverlay.addEventListener('click', function(event) {
+      if (event.target === tutorialOverlay) {
+        saveTutorialPreference();
+        hideTutorial();
+      }
+    });
+    
+    // Auto-show tutorial on first visit (if not opted out before)
+    if (!localStorage.getItem(storageKey) && videoId) {
+      // Delay showing tutorial by 1 second to let the page load first
+      setTimeout(showTutorial, 1000);
+    }
+  }
+});

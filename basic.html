@@ -11,6 +11,7 @@
   <!-- CSS Files -->
   <link rel="stylesheet" href="css/header-footer.css" />
   <link rel="stylesheet" href="css/basic-calculator.css" />
+  <link rel="stylesheet" href="css/quote-request.css" />
   <link rel="stylesheet" href="css/layout.css" />
 </head>
 
@@ -27,8 +28,43 @@
   </div>
 
   <div class="title">
-    <h1>Solar Calculator - Basic Mode</h1>
+    <h1>Solar Calculator - Basic</h1>
     <p class="subtitle">Estimate your solar system requirements based on your appliance usage</p>
+  </div>
+
+  <!-- Home Button -->
+  <div class="home-button-container">
+    <a href="index.html" class="home-button">
+      <i class="fas fa-home"></i> <span>Back to Home</span>
+    </a>
+  </div>
+
+  <!-- Tutorial Button -->
+  <button class="open-tutorial-btn" id="openTutorialBtn">
+    <i class="fas fa-play-circle"></i>
+  </button>
+
+  <!-- Video Tutorial Popup -->
+  <div class="tutorial-overlay basic-mode" id="tutorialOverlay">
+    <div class="tutorial-container">
+      <div class="tutorial-header">
+        <h3>How to Use the Basic Calculator</h3>
+        <button class="tutorial-close" id="closeTutorialBtn">&times;</button>
+      </div>
+      <div class="tutorial-content">
+        <!-- Replace with actual YouTube video ID -->
+        <iframe id="tutorialVideo" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="tutorial-footer">
+        <div class="checkbox-container">
+          <input type="checkbox" id="dontShowAgain">
+          <label for="dontShowAgain">Don't show this tutorial again</label>
+        </div>
+        <button class="tutorial-button" id="gotItBtn">
+          <i class="fas fa-check"></i> Got it!
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="mode-switch-container">
@@ -58,6 +94,12 @@
           <div class="metric-label">Average Energy Per Day</div>
           <div class="metric-value"><span id="total-kwh-per-day">0</span> kWh</div>
         </div>
+      </div>
+
+      <!-- Warning Message -->
+      <div class="warning-message">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>These estimates may not be exact. Actual energy usage can vary based on specific models and usage patterns.</span>
       </div>
 
       <!-- Room Templates Banner -->
@@ -113,10 +155,10 @@
                     <td>Simultaneous Usage Scenario</td>
                     <td>
                       <select id="simultaneous-usage" class="form-control">
-                        <option value="30">Home: Low Usage (30%)</option>
-                        <option value="50" selected>Home: Average Usage (50%)</option>
-                        <option value="70">Office: High Usage (70%)</option>
-                        <option value="90">Factory: Very High Usage (90%)</option>
+                        <option value="30">Low Usage (30%)</option>
+                        <option value="50" selected>Average Usage (50%)</option>
+                        <option value="70">High Usage (70%)</option>
+                        <option value="90">Very High Usage (90%)</option>
                       </select>
                     </td>
                   </tr>
@@ -148,7 +190,7 @@
                     <th>Appliance</th>
                     <th>Quantity</th>
                     <th>Watts</th>
-                    <th>Hours/Day</th>
+                    <th>Hours</th>
                     <th>kWh/Day</th>
                     <th>Action</th>
                   </tr>
@@ -163,6 +205,36 @@
 
         <!-- Appliance Selection Panel (Right Side) -->
         <div class="appliance-panel">
+          <div class="panel-card">
+            <div class="card-header">
+              Usage Tips
+            </div>
+            <div class="tips-content">
+              <div class="tip-item">
+                <i class="fas fa-lightbulb tip-icon"></i>
+                <div class="tip-text">The <strong>Simultaneous Usage</strong> setting adjusts how many appliances you expect to use at the same time.</div>
+              </div>
+              <div class="tip-item">
+                <i class="fas fa-battery-half tip-icon"></i>
+                <div class="tip-text"><strong>Days of Reserve Power</strong> determines how long your batteries should last during low/no sun periods.</div>
+              </div>
+              <div class="tip-item">
+                <i class="fas fa-sun tip-icon"></i>
+                <div class="tip-text"><strong>Average Sun Hours</strong> refers to peak sunlight hours per day in your location.</div>
+              </div>
+              <div class="tip-item">
+                <i class="fas fa-info-circle tip-icon"></i>
+                <div class="tip-text">Click the <strong>Advanced Mode</strong> button below for more detailed calculations including location-specific data.</div>
+              </div>
+            </div>
+            <a href="advanced.html" class="advanced-mode-btn">
+              <i class="fas fa-sliders-h"></i> Switch to Advanced Mode
+            </a>
+              <button id="request-quote-btn" class="quote-request-floating-btn-2">
+                <i class="fas fa-file-invoice-dollar"></i> Request a Quote
+              </button>
+          </div>
+
           <div class="panel-card">
             <div class="card-header">
               Select Appliances
@@ -349,37 +421,12 @@
                 </div>
             </div>
           </div>
-          
-          <div class="panel-card">
-            <div class="card-header">
-              Usage Tips
-            </div>
-            <div class="tips-content">
-              <div class="tip-item">
-                <i class="fas fa-lightbulb tip-icon"></i>
-                <div class="tip-text">The <strong>Simultaneous Usage</strong> setting adjusts how many appliances you expect to use at the same time.</div>
-              </div>
-              <div class="tip-item">
-                <i class="fas fa-battery-half tip-icon"></i>
-                <div class="tip-text"><strong>Days of Reserve Power</strong> determines how long your batteries should last during low/no sun periods.</div>
-              </div>
-              <div class="tip-item">
-                <i class="fas fa-sun tip-icon"></i>
-                <div class="tip-text"><strong>Average Sun Hours</strong> refers to peak sunlight hours per day in your location.</div>
-              </div>
-              <div class="tip-item">
-                <i class="fas fa-info-circle tip-icon"></i>
-                <div class="tip-text">Click the <strong>Advanced Mode</strong> button below for more detailed calculations including location-specific data.</div>
-              </div>
-            </div>
-            <a href="advanced.html" class="advanced-mode-btn">
-              <i class="fas fa-sliders-h"></i> Switch to Advanced Mode
-            </a>
-          </div>
         </div>
       </div>
     </div>
   </main>
+
+ 
 
   <!-- Footer Placeholder -->
   <div id="footer-placeholder"></div>
@@ -387,5 +434,6 @@
   <!-- Scripts -->
   <script src="js/layout.js" defer></script>
   <script src="js/basic-calculator.js" defer></script>
+  <script src="js/quote-request.js" defer></script>
 </body>
 </html>

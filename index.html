@@ -3,389 +3,339 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solar Calculator - Choose Your Mode</title>
+  <title>TE PNG - Smart Energy Management System</title>
 
   <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
-
-    body {
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-      background: #1a3755;
-      padding: 40px 0;
-      color: #ffffff;
-      border-radius: 10px;
-    }
-
-    .header h1 {
-      font-size: 36px;
-      font-weight: 500;
-      margin-bottom: 10px;
-      letter-spacing: 0.5px;
-    }
-
-    .header p {
-      font-size: 18px;
-      max-width: 800px;
-      margin: 0 auto;
-      opacity: 0.9;
-    }
-
-    .modes-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin: 50px 0;
-    }
-
-    .mode-card {
-      background-color: white;
-      border-radius: 15px;
-      overflow: hidden;
-      width: 350px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .mode-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .mode-header {
-      padding: 30px;
-      text-align: center;
-    }
-
-    .simple-header {
-      background-color: #27ae60;
-      color: white;
-    }
-
-    .basic-header {
-      background-color: #3498db;
-      color: white;
-    }
-
-    .advanced-header {
-      background-color: #8e44ad;
-      color: white;
-    }
-
-    .mode-icon {
-      font-size: 50px;
-      margin-bottom: 15px;
-    }
-
-    .mode-title {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .mode-subtitle {
-      font-size: 16px;
-      opacity: 0.9;
-    }
-
-    .mode-content {
-      padding: 30px;
-    }
-
-    .mode-description {
-      margin-bottom: 20px;
-    }
-
-    .feature-list {
-      list-style-type: none;
-      margin-bottom: 25px;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .feature-icon {
-      color: #27ae60;
-      margin-right: 10px;
-      font-size: 18px;
-    }
-
-    .simple-mode .feature-icon {
-      color: #27ae60;
-    }
-
-    .basic-mode .feature-icon {
-      color: #3498db;
-    }
-
-    .advanced-mode .feature-icon {
-      color: #8e44ad;
-    }
-
-    .mode-button {
-      display: inline-block;
-      width: 100%;
-      padding: 15px;
-      text-align: center;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .simple-button {
-      background-color: #27ae60;
-      color: white;
-    }
-
-    .simple-button:hover {
-      background-color: #219653;
-    }
-
-    .basic-button {
-      background-color: #3498db;
-      color: white;
-    }
-
-    .basic-button:hover {
-      background-color: #2980b9;
-    }
-
-    .advanced-button {
-      background-color: #8e44ad;
-      color: white;
-    }
-
-    .advanced-button:hover {
-      background-color: #7d3c98;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 50px;
-      padding: 20px;
-      color: #777;
-    }
-
-    .language-selector {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .language-button {
-      background: none;
-      border: 1px solid #ccc;
-      padding: 8px 15px;
-      margin: 0 5px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .language-button:hover, .language-button.active {
-      background-color: #1a3755;
-      color: white;
-      border-color: #1a3755;
-    }
-
-    @media (max-width: 768px) {
-      .modes-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .mode-card {
-        width: 100%;
-        max-width: 400px;
-      }
-    }
-  </style>
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/header-footer.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/home.css" />
 </head>
 
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Solar Calculator</h1>
-      <p>Find the perfect solar solution for your needs by choosing the calculator mode that works best for you</p>
-    </div>
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
 
-    <div class="language-selector">
-      <button class="language-button active">English</button>
-      <button class="language-button">한국어</button>
-      <button class="language-button">日本語</button>
-      <button class="language-button">中文</button>
-    </div>
-
-    <div class="modes-container">
-      <!-- Simple Mode -->
-      <div class="mode-card simple-mode">
-        <div class="mode-header simple-header">
-          <div class="mode-icon">
-            <i class="fas fa-smile"></i>
-          </div>
-          <h2 class="mode-title">Simple Mode</h2>
-          <div class="mode-subtitle">Easy & Visual</div>
-        </div>
-        <div class="mode-content">
-          <p class="mode-description">Perfect for beginners or if you just want quick estimates with minimal input. Visual and straightforward.</p>
-          
-          <ul class="feature-list">
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Visual interface with minimal text</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>3 simple steps to complete</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Pre-set options for home types</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Built-in explanations and help</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Audio guidance available</span>
-            </li>
-          </ul>
-
-          <a href="solar-calculator-simple.html" class="mode-button simple-button">
-            Start Simple Mode
-          </a>
-        </div>
-      </div>
-
-      <!-- Basic Mode -->
-      <div class="mode-card basic-mode">
-        <div class="mode-header basic-header">
-          <div class="mode-icon">
-            <i class="fas fa-solar-panel"></i>
-          </div>
-          <h2 class="mode-title">Basic Mode</h2>
-          <div class="mode-subtitle">Balanced & Practical</div>
-        </div>
-        <div class="mode-content">
-          <p class="mode-description">Our standard calculator with the most commonly used features. Balanced between simplicity and detail.</p>
-          
-          <ul class="feature-list">
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Complete appliance selection</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Customizable usage scenarios</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Equipment size recommendations</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Save and load configurations</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Printable summary report</span>
-            </li>
-          </ul>
-
-          <a href="solar-calculator-basic.html" class="mode-button basic-button">
-            Start Basic Mode
-          </a>
-        </div>
-      </div>
-
-      <!-- Advanced Mode -->
-      <div class="mode-card advanced-mode">
-        <div class="mode-header advanced-header">
-          <div class="mode-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h2 class="mode-title">Advanced Mode</h2>
-          <div class="mode-subtitle">Detailed & Precise</div>
-        </div>
-        <div class="mode-content">
-          <p class="mode-description">For professionals and enthusiasts who need detailed calculations and want to fine-tune every parameter.</p>
-          
-          <ul class="feature-list">
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Location-specific solar data</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Panel orientation optimization</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Monthly energy production graphs</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Financial ROI calculations</span>
-            </li>
-            <li class="feature-item">
-              <i class="fas fa-check feature-icon"></i>
-              <span>Technical specifications export</span>
-            </li>
-          </ul>
-
-          <a href="solar-calculator-advanced.html" class="mode-button advanced-button">
-            Start Advanced Mode
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">
-      <p>© 2025 Solar Calculator. All rights reserved.</p>
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" style="display: none;">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <p id="loading-message">Loading...</p>
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Language selector functionality
-      const languageButtons = document.querySelectorAll('.language-button');
+  <!-- Page Navigation -->
+  <div class="page-navigation">
+    <div class="navigation-container">
+      <ul class="navigation-links">
+        <li><a href="#calculator-options">Calculators</a></li>
+        <li><a href="#sems-overview">About SEMS</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#nova-platform">NOVA Platform</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Smart Energy Management System</h1>
+      <p class="hero-subtitle">More Than Just Solar <br> A Complete Energy Solution for your home or business</p>
+      <a href="#calculator-options" class="cta-button">Try Our Calculator</a>
+      <a href="#sems-overview" class="cta-button secondary">Learn About SEMS</a>
+    </div>
+    <img src="assets/layout/banner.png" alt="SEMS Banner" class="hero-background">
+    <div class="hero-overlay"></div>
+  </section>
+
+  <main>
+    <!-- Calculator Options Section -->
+    <section class="calculator-options" id="calculator-options">
+      <h2 class="section-title">Choose Your Calculator Mode</h2>
       
-      languageButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          languageButtons.forEach(btn => btn.classList.remove('active'));
-          this.classList.add('active');
+      <div class="mode-switcher-container">
+        <div class="mode-switcher">
+          <div class="mode-tabs">
+            <div class="mode-tab active" data-mode="simple">
+              <i class="fas fa-smile"></i>
+              <span>Simple</span>
+            </div>
+            <div class="mode-tab" data-mode="basic">
+              <i class="fas fa-solar-panel"></i>
+              <span>Basic</span>
+            </div>
+            <div class="mode-tab" data-mode="advanced">
+              <i class="fas fa-chart-line"></i>
+              <span>Advanced</span>
+            </div>
+            <div class="tab-indicator"></div>
+          </div>
           
-          // In a real implementation, this would change the page language
-          // alert('Language changed to ' + this.textContent);
-        });
-      });
-    });
-  </script>
+          <div class="mode-content-container">
+            <div class="mode-content active" data-mode="simple">
+              <div class="mode-header">
+                <h3>Simple Mode Calculator</h3>
+                <p>Perfect for beginners and quick estimates</p>
+              </div>
+              <div class="mode-description">
+                <p>Easy-to-use calculator for anyone. Select your home type and get quick solar recommendations in just a few steps. Ideal for those who want a simple estimate without technical details.</p>
+                <ul class="mode-features">
+                  <li><i class="fas fa-check"></i> Easy 3-step process</li>
+                  <li><i class="fas fa-check"></i> No technical knowledge required</li>
+                  <li><i class="fas fa-check"></i> Quick estimates in minutes</li>
+                </ul>
+                <a href="simple.html" class="mode-button simple">Use Simple Calculator</a>
+              </div>
+              <div class="mode-image">
+                <img src="assets/preview/simple-preview.png" alt="Simple Mode Calculator">
+              </div>
+            </div>
+            
+            <div class="mode-content" data-mode="basic">
+              <div class="mode-header">
+                <h3>Basic Mode Calculator</h3>
+                <p>Detailed appliance-based calculations</p>
+              </div>
+              <div class="mode-description">
+                <p>Select your appliances and customize usage patterns for more detailed solar system recommendations. Great for homeowners who want more accurate sizing based on actual usage.</p>
+                <ul class="mode-features">
+                  <li><i class="fas fa-check"></i> Customize with your appliances</li>
+                  <li><i class="fas fa-check"></i> Adjust usage patterns</li>
+                  <li><i class="fas fa-check"></i> Detailed recommendations</li>
+                </ul>
+                <a href="basic.html" class="mode-button basic">Use Basic Calculator</a>
+              </div>
+              <div class="mode-image">
+                <img src="assets/preview/basic-preview.png" alt="Basic Mode Calculator">
+              </div>
+            </div>
+            
+            <div class="mode-content" data-mode="advanced">
+              <div class="mode-header">
+                <h3>Advanced Mode Calculator</h3>
+                <p>Professional-grade system design</p>
+              </div>
+              <div class="mode-description">
+                <p>Professional-grade calculator with detailed parameters, including location-specific data and system configurations. Ideal for technical users who need precise calculations.</p>
+                <ul class="mode-features">
+                  <li><i class="fas fa-check"></i> Location-specific solar data</li>
+                  <li><i class="fas fa-check"></i> Custom system configuration</li>
+                  <li><i class="fas fa-check"></i> Technical specifications</li>
+                </ul>
+                <a href="advanced.html" class="mode-button advanced">Use Advanced Calculator</a>
+              </div>
+              <div class="mode-image">
+                <img src="assets/preview/advanced-preview.png" alt="Advanced Mode Calculator">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <h2 class="section-title">Why Choose Our Energy Solutions</h2>
+      
+      <div class="features-container">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="feature-title">Free NOVA Platform</h3>
+          <p class="feature-description">Monitor and control your energy system from anywhere using our free cloud-based platform.</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-history"></i>
+          </div>
+          <h3 class="feature-title">65+ Years of Experience in PNG</h3>
+          <p class="feature-description">Trusted local expertise with decades of experience serving Papua New Guinea's energy needs.</p>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="feature-title">5-10 Year Warranty</h3>
+          <p class="feature-description">Comprehensive warranty backed by TE PNG and our manufacturers for peace of mind.</p>
+        </div>
+        
+        
+      </div>
+    </section>
+
+    <!-- About SEMS Section -->
+    <section class="about-sems" id="sems-overview">
+      <div class="about-sems-container">
+        <div class="about-sems-content">
+          <h2>Not Just Solar - A Complete Energy Management System</h2>
+          <p>TE PNG's Smart Energy Management System (SEMS) goes beyond traditional solar solutions. Our system intelligently manages power from multiple sources, ensuring you always have reliable energy.</p>
+          
+          <ul class="feature-list">
+            <li><i class="fas fa-check-circle"></i> Works with or without solar panels</li>
+            <li><i class="fas fa-check-circle"></i> Seamless auto-switching between power sources</li>
+            <li><i class="fas fa-check-circle"></i> Free cloud-based monitoring platform</li>
+            <li><i class="fas fa-check-circle"></i> Local support with global standards</li>
+            <li><i class="fas fa-check-circle"></i> Market competitive with price guarantee</li>
+          </ul>
+        </div>
+        
+        <div class="about-sems-image">
+          <img src="assets/layout/sems.png" alt="SEMS Diagram">
+        </div>
+      </div>
+    </section>
+
+    <!-- How SEMS Works Section -->
+    <section class="section" id="how-it-works">
+      <h2 class="section-title">How SEMS Works</h2>
+      <p class="section-description">The TBB Power Raython system is designed for seamless automatic switching between various power sources like grid, solar, battery, and a generator.</p>
+      
+      <div class="triangle-container">
+        <div class="triangle-item">
+          <div class="triangle-icon">
+            <i class="fas fa-list-ol fa-2x"></i>
+          </div>
+          <div class="triangle-content">
+            <h3>Prioritized Power Supply</h3>
+            <p>The system operates based on user-configurable priority settings, allowing you to define which power source should be utilized first.</p>
+          </div>
+        </div>
+        
+        <div class="triangle-item">
+          <div class="triangle-icon">
+            <i class="fas fa-search fa-2x"></i>
+          </div>
+          <div class="triangle-content">
+            <h3>Intelligent Monitoring</h3>
+            <p>SEMS constantly monitors the availability and status of each power source, including solar energy generation, battery state, grid stability, and generator status.</p>
+          </div>
+        </div>
+        
+        <div class="triangle-item">
+          <div class="triangle-icon">
+            <i class="fas fa-exchange-alt fa-2x"></i>
+          </div>
+          <div class="triangle-content">
+            <h3>Automatic Transfer Switch</h3>
+            <p>The integrated high-speed automatic transfer switch physically changes the power source to your appliances with zero interruption.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOVA Platform Section -->
+    <section class="nova-section" id="nova-platform">
+      <div class="nova-container">
+        <h2 class="section-title">NOVA Management Platform</h2>
+        <p class="section-description">TBB Power's Nova platform is a cloud-based energy management and monitoring system that's included free with your SEMS.</p>
+        
+        <div class="two-columns">
+          <div class="column image-column">
+            <img src="assets/layout/nova.png" alt="NOVA Platform Interface">
+          </div>
+          
+          <div class="column content-column">
+            <ul class="details-list">
+              <li>
+                <i class="fas fa-chart-line fa-2x"></i>
+                <div class="detail-content">
+                  <h3>Real-time Data and Status</h3>
+                  <p>View live data on all connected system components, current power generation, consumption, and battery state.</p>
+                </div>
+              </li>
+              
+              <li>
+                <i class="fas fa-desktop fa-2x"></i>
+                <div class="detail-content">
+                  <h3>Remote Monitoring and Control</h3>
+                  <p>Monitor system performance from anywhere, configure settings remotely, and troubleshoot without site visits.</p>
+                </div>
+              </li>
+              
+              <li>
+                <i class="fas fa-chart-bar fa-2x"></i>
+                <div class="detail-content">
+                  <h3>Detailed Analytics</h3>
+                  <p>Generate comprehensive reports on energy production, consumption, and battery performance to analyze usage patterns.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Do I need solar panels to use the SEMS?</h3>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>No, that's one of the key advantages of our system. The SEMS can work with or without solar panels, managing power from grid, generator, and batteries. Solar panels can be added to the system at any time.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How quickly does the system switch between power sources?</h3>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>The switching occurs within milliseconds, fast enough to prevent any interruption to sensitive appliances like computers. Most users don't even notice when the system changes from one source to another.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Is the NOVA platform really free?</h3>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, the NOVA cloud-based monitoring platform is included at no additional cost with your SEMS purchase. This includes both the web interface and mobile applications.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What kind of warranty comes with the system?</h3>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>TE PNG provides a comprehensive 5-10 year warranty (depending on components) that's backed by both ourselves and our manufacturers, ensuring you have complete peace of mind.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title">Ready to Transform Your Energy Infrastructure?</h2>
+        <p class="cta-description">Start with our calculator to get recommendations, then contact our team to learn how a complete Smart Energy Management System can work for you.</p>
+        <div class="cta-buttons">
+          <a href="#calculator-options" class="cta-button">Try Our Calculator</a>
+          <a href="https://tepng.com/contact-us" class="cta-button secondary">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="js/layout.js" defer></script>
+  <script src="js/home.js" defer></script>
 </body>
 </html>
