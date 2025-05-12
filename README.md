@@ -17,11 +17,6 @@ Our project aims to provide a solution to the people of Papua New Guinea and Sol
 - **Solar System Estimation**:
   - Calculates required solar panels, inverter size, and battery capacity
   - Provides estimated savings and environmental benefits
-- **Cloud-Based NOVA Platform**:
-  - Monitor and control your energy system remotely
-- **Professional Support**:
-  - 65+ years of experience serving Papua New Guinea
-  - Comprehensive 5-10 year warranty on solar systems
 
 ## Getting Started
 
