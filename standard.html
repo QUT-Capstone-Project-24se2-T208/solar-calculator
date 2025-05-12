@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solar Calculator - Basic Mode</title>
+  <title>Solar Calculator - Standard Mode</title>
 
   <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
   <!-- CSS Files -->
   <link rel="stylesheet" href="css/header-footer.css" />
-  <link rel="stylesheet" href="css/basic-calculator.css" />
-  <link rel="stylesheet" href="css/quote-request.css" />
   <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/quote-request.css" />
+  <link rel="stylesheet" href="css/standard-calculator.css" />
 </head>
 
 <body>
@@ -28,7 +28,7 @@
   </div>
 
   <div class="title">
-    <h1>Solar Calculator - Basic</h1>
+    <h1>Solar Calculator - Standard</h1>
     <p class="subtitle">Estimate your solar system requirements based on your appliance usage</p>
   </div>
 
@@ -48,7 +48,7 @@
   <div class="tutorial-overlay basic-mode" id="tutorialOverlay">
     <div class="tutorial-container">
       <div class="tutorial-header">
-        <h3>How to Use the Basic Calculator</h3>
+        <h3>How to Use the Standard Calculator</h3>
         <button class="tutorial-close" id="closeTutorialBtn">&times;</button>
       </div>
       <div class="tutorial-content">
@@ -67,16 +67,17 @@
     </div>
   </div>
 
+  <!-- Mode Selector -->
   <div class="mode-switch-container">
     <div class="mode-switch">
-      <div class="mode-option" data-mode="simple">
-        <i class="fas fa-smile"></i> Simple Mode
+      <div class="mode-option" data-mode="assistive">
+        <i class="fas fa-smile"></i> <span>Assistive Mode</span>
       </div>
-      <div class="mode-option active" data-mode="basic">
-        <i class="fas fa-solar-panel"></i> Basic Mode
+      <div class="mode-option active" data-mode="standard">
+        <i class="fas fa-solar-panel"></i> <span>Standard Mode</span>
       </div>
       <div class="mode-option" data-mode="advanced">
-        <i class="fas fa-chart-line"></i> Advanced Mode
+        <i class="fas fa-chart-line"></i> <span>Advanced Mode</span>
       </div>
       <div class="mode-slider"></div>
     </div>
@@ -433,7 +434,7 @@
 
   <!-- Scripts -->
   <script src="js/layout.js" defer></script>
-  <script src="js/basic-calculator.js" defer></script>
+  <script src="js/standard-calculator.js" defer></script>
   <script src="js/quote-request.js" defer></script>
 </body>
 </html>

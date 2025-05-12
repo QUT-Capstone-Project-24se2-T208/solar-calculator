@@ -1,3 +1,7 @@
+/**
+ * Advanced Mode Calculator
+ * Handles the advanced calculator functionality with detailed system planning.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   // Step navigation elements
   const stepItems = document.querySelectorAll('.step-item');

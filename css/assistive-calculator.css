@@ -734,6 +734,10 @@
   color: #1a3755;
 }
 
+.result-value-text {
+  display: inline-block;
+}
+
 .result-description {
   font-size: 14px;
   color: #666;
@@ -1150,7 +1154,7 @@
   }
 
   .result-name, .result-value, .result-description{
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .results-grid {
@@ -1166,6 +1170,7 @@
   .audio-controls {
     flex-direction: column;
     align-items: center;
+    padding: 5px;
   }
 
   .appliance-categories{
@@ -1219,7 +1224,7 @@
   }
   
   .mode-option {
-    font-size: 14px;
+    font-size: 11px;
     padding: 10px 5px;
   }
   
@@ -1265,5 +1270,16 @@
     background-color: white;
     color: black;
     border: 2px solid #000;
+  }
+}
+
+@media (max-width: 475px) {
+  .result-name, .result-value, .result-description {
+    font-size: 13px;
+  }
+
+  
+  .result-value-text br {
+    display: block;
   }
 }

@@ -1,121 +1,130 @@
-# Solar Calculator
+# Solar System Calculator
 
-A comprehensive web-based tool for calculating solar energy system requirements for homes and businesses.
+This web application provides a comprehensive tool to calculate the required solar system based on various appliances and usage patterns. 
+
 Live demo available at https://solar-calculator-chi.vercel.app/
 
 ## Overview
 
-This Solar Calculator provides customizable solar energy system calculations with three different modes to accommodate users with varying levels of expertise:
-
-- **Basic Mode**: Appliance-based calculator for detailed energy usage analysis
-- **Simple Mode**: Streamlined interface with predefined templates for quick estimates
-- **Advanced Mode**: Detailed calculations using geographical data and advanced parameters
-
-The calculator helps users determine the appropriate solar panel size, battery capacity, and inverter requirements based on their specific energy needs and location.
+Our project aims to provide a solution to the people of Papua New Guinea and Solomon Islands who require simple and accessible information regarding solar power systems. The web page provides immediate results and educational elements to assist users in their consideration to move to a solar-powered home.
 
 ## Features
 
-### Basic Calculator Mode
-- Detailed appliance-based energy calculation
-- Add unlimited appliances with customizable wattage and usage hours
-- Calculate total load, daily energy requirements, and system specifications
-- Save and load configurations
+- **Three Calculator Modes**:
+  - **Assistive Mode**: Easy 3-step process with voice-over instructions and Tok Pisin language support
+  - **Standard Mode**: Detailed appliance-based calculations with customizable usage patterns
+  - **Advanced Mode**: Professional-grade solar system design with location-specific data
+- **Solar System Estimation**:
+  - Calculates required solar panels, inverter size, and battery capacity
+  - Provides estimated savings and environmental benefits
+- **Cloud-Based NOVA Platform**:
+  - Monitor and control your energy system remotely
+- **Professional Support**:
+  - 65+ years of experience serving Papua New Guinea
+  - Comprehensive 5-10 year warranty on solar systems
 
-### Simple Calculator Mode
-- User-friendly interface for quick solar sizing
-- Predefined home templates based on number of bedrooms
-- Visual selection of key parameters
-- Multilingual support (English and Tok Pisin)
-- Voice guidance for accessibility
+## Getting Started
 
-### Advanced Calculator Mode
-- Location-based solar calculations with map integration
-- Detailed technical parameters and system sizing
-- Visual panel orientation tool with 3D modeling
-- Solar production statistics with detailed charts
-- Monthly and hourly energy production estimates
-- Financial savings calculator with multi-currency support
-- Environmental impact assessment
+1. **Choose a Calculator Mode**:
+   - Use Assistive Mode for beginners and quick estimates
+   - Use Standard Mode for detailed appliance-based calculations
+   - Use Advanced Mode for professional-grade system design
 
-## Technical Details
+2. **Follow the Step-by-Step Process**:
+   - Enter your location and energy usage details
+   - Configure your system preferences
+   - Review results and request a quote
 
-### Calculation Methods
+3. **Access the Application**:
+   - Live demo available at https://solar-calculator-chi.vercel.app/
 
-The calculator uses established formulas for solar energy system design:
+## Usage Guide
 
-- **Energy Consumption**: `kWh = (Wattage × Hours × Quantity) ÷ 1000`
-- **Solar Panel Sizing**: `Panel capacity = Daily energy usage ÷ Peak sun hours`
-- **Battery Sizing**: `Battery capacity = Daily energy × Reserve days`
-- **Inverter Sizing**: `Inverter capacity = Total simultaneous wattage × Safety factor`
+### Assistive Mode
 
-Advanced calculations include location-specific parameters:
-- Global Tilted Irradiation (GTI)
-- Optimal panel tilt and orientation
-- System performance ratio
-- Self-sufficiency percentage
+1. Select your home type and get quick solar recommendations
+2. Voice-over instructions guide you through the process
+3. Available in Tok Pisin language for maximum accessibility
 
-### Technologies Used
+### Standard Mode
+
+#### Add Appliance
+
+1. Select appliances from the Appliance Menus
+2. Confirm selected appliances appear on the results tab
+3. Repeat until all appliances in your home are selected
+
+#### Create Custom Appliances
+
+1. Scroll to the bottom of the appliance menu and select **Custom Appliance**
+2. Configure the custom appliance in the results tab
+3. Enter the **Quantity**, **Running Watts**, and **Hours per Day**
+
+#### Viewing Results
+
+1. Results appear in the **System Requirements** section
+2. Review information about solar panels, inverter size, and battery capacity
+3. Adjust parameters like simultaneous usage, reserve days, and sun hours
+
+### Advanced Mode
+
+1. **Set Location**: Use the map to select your location or enter coordinates
+2. **Configure Usage**: Set your daily energy consumption and cost
+3. **Choose System Type**: Select the installation environment (residential, commercial, etc.)
+4. **Panel Settings**: Adjust orientation and tilt for optimal performance
+5. **Review Results**: Analyze estimated output, savings, and environmental benefits
+
+### Uploading Roof Images
+
+1. Navigate to the quote request section
+2. Click the "Upload Images" button to select roof images from your computer
+3. Add multiple images to help with the assessment process
+
+### Requesting a Quote
+
+1. Fill in your contact information in the quote request form
+2. Review your system specifications
+3. Add any additional comments or requirements
+4. Submit your request for a professional assessment
+
+## API
+
+This website uses data available from the Solargis database.
+
+### Example API Query
+
+```JavaScript
+// The URL to fetch solar data for a specific latitude and longitude
+const url = 'https://api.globalsolaratlas.info/data/lta?loc=-6.487254,145.156558';
+
+// Function to fetch the data
+async function fetchSolarData() {
+  try {
+    const response = await fetch(url);
+    
+    // If the response is successful, convert it to JSON
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Solar Data:', data);
+    } else {
+      console.error('Error fetching data:', response.status);
+    }
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+}
+
+// Call the function
+fetchSolarData();
+```
+
+## Technologies Used
 
 - HTML5, CSS3, and JavaScript
-- Responsive design for mobile and desktop use
-- Interactive charts for data visualization
-- Local storage for saving user configurations
-- Web Speech API for voice guidance
-- Leaflet.js for map integration
+- Node.js and Express for the backend
+- Nodemailer for email functionality
 - Chart.js for data visualization
-
-## Installation and Usage
-
-1. Clone the repository
-```bash
-git clone https://github.com/QUT-Capstone-Project-24se2-T208/solar-calculator.git
-```
-
-2. Open the index.html file in your web browser or host the files on a web server.
-
-3. Choose the calculation mode that best suits your needs.
-
-4. Follow the step-by-step interface to input your energy usage and requirements.
-
-5. Review the generated results for solar system specifications.
-
-## Project Structure
-
-```
-solar-calculator/
-├── index.html                  # Main entry point
-├── css/                        # Style sheets
-│   ├── style.css               # Main styles
-│   ├── basic-calculator.css    # Basic mode styles
-│   ├── simple-calculator.css   # Simple mode styles
-│   └── advanced-calculator.css # Advanced mode styles
-├── js/                         # JavaScript files
-│   ├── basic-calculator.js     # Basic calculator logic
-│   ├── simple-calculator.js    # Simple calculator logic
-│   ├── advanced-calculator.js  # Advanced calculator logic
-│   └── appliances-module.js    # Shared appliance data
-├── assets/                     # Images and resources
-│   ├── appliances/             # Appliance icons
-│   ├── logo/                   # Logo files
-│   └── ui/                     # UI elements
-└── README.md                   # This file
-```
-
-## Browser Compatibility
-
-The calculator is compatible with all modern browsers:
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
-
-## Future Enhancements
-
-- Integration with solar panel product databases
-- Cost estimation for complete solar installations
-- Weather API integration for more accurate local data
-- Additional language support
-- Mobile app versions
+- Web APIs for geolocation and solar data
 
 ## License
 
@@ -129,4 +138,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-For questions or feedback, please contact sjun0500@gmail.com.
+For questions or feedback, please contact s296.lee@connect.qut.edu.au

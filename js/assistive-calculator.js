@@ -1,3 +1,8 @@
+/**
+ * Assistive Calculator Module
+ * Handles the assistive (simplified) calculator functionality.
+ * This handles a step-by-step calculator experience with audio guidance.
+ */
 document.addEventListener("DOMContentLoaded", function() {
   // Add custom appliance counter at the top with other state variables
   let customApplianceCount = 0;
@@ -11,9 +16,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const translations = {
     en: {
       // Header and navigation
-      'main-title': 'Solar Calculator - Simple Mode',
+      'main-title': 'Solar Calculator - Assistive Mode',
       'main-subtitle': 'Find the right solar system for your home',
-      'main-title-bar': 'Solar Calculator - Simple Mode',
+      'main-title-bar': 'Solar Calculator - Assistive Mode',
       'main-subtitle-bar': 'Find the right solar system for your home',
       'listen-text': 'Listen to Instructions',
       'stop-text': 'Stop Audio',
@@ -913,55 +918,55 @@ document.addEventListener("DOMContentLoaded", function() {
       // Determine appropriate solar panel recommendation
       let solarText = '';
       if (solarPanelSize <= 0.5) {
-        solarText = '2 panels';
+        solarText = '1 - 2 panels';
       } else if (solarPanelSize <= 1) {
-        solarText = '4 panels';
+        solarText = '3 - 4 panels';
       } else if (solarPanelSize <= 2) {
-        solarText = '6 panels';
+        solarText = '5 - 6 panels';
       } else if (solarPanelSize <= 3) {
-        solarText = '9 panels';
+        solarText = '7 - 9 panels';
       } else if (solarPanelSize <= 4) {
-        solarText = '12 panels';
+        solarText = '10 - 12 panels';
       } else if (solarPanelSize <= 5) {
-        solarText = '15 panels';
+        solarText = '13 - 15 panels';
       } else {
-        solarText = '20+ panels';
+        solarText = '16 - 20+ panels';
       }
       
       // Determine appropriate battery recommendation
       let batteryText = '';
       if (batteryCapacity <= 1) {
-        batteryText = 'Small (1kWh)';
+        batteryText = 'Small (0.5 - 1kWh)';
       } else if (batteryCapacity <= 2) {
-        batteryText = 'Small (2kWh)';
+        batteryText = 'Small (1.5 - 2kWh)';
       } else if (batteryCapacity <= 5) {
-        batteryText = 'Medium (5kWh)';
+        batteryText = 'Medium (3 - 5kWh)';
       } else if (batteryCapacity <= 10) {
-        batteryText = 'Medium (10kWh)';
+        batteryText = 'Medium (7 - 10kWh)';
       } else if (batteryCapacity <= 15) {
-        batteryText = 'Large (15kWh)';
+        batteryText = 'Large (12 - 15kWh)';
       } else {
-        batteryText = 'Very Large (20kWh+)';
+        batteryText = 'Very Large (15 - 20kWh+)';
       }
       
       // Determine appropriate system size recommendation
       let systemText = '';
       if (systemSize === 30) {
-        systemText = 'Small (3kVA)';
+        systemText = 'Small (2 - 3kVA)';
       } else if (systemSize === 50) {
-        systemText = 'Medium (5kVA)';
+        systemText = 'Medium (4 - 5kVA)';
       } else if (systemSize === 70) {
-        systemText = 'Large (10kVA)';
+        systemText = 'Large (8 - 10kVA)';
       } else if (systemSize === 90) {
-        systemText = 'Extra Large (15kVA)';
+        systemText = 'Extra Large (12 - 15kVA)';
       } else {
-        systemText = 'Medium (5kVA)';
+        systemText = 'Medium (4 - 5kVA)';
       }
       
       // Update result values
-      document.getElementById('solar-panel-value').textContent = solarText;
-      document.getElementById('battery-value').textContent = batteryText;
-      document.getElementById('system-size-value').textContent = systemText;
+      document.getElementById('solar-panel-value').querySelector('.result-value-text').innerHTML = solarText;
+      document.getElementById('battery-value').querySelector('.result-value-text').innerHTML = batteryText.replace(/\(([^)]+)\)/, '<br>($1)');
+      document.getElementById('system-size-value').querySelector('.result-value-text').innerHTML = systemText.replace(/\(([^)]+)\)/, '<br>($1)');
       
       hideLoadingSpinner();
     }, 1500);
@@ -1188,9 +1193,23 @@ document.addEventListener("DOMContentLoaded", function() {
           // Get selected appliances and results data
           const appliances = getSelectedAppliances();
           const totalEnergy = calculateTotalEnergy();
-          const solarPanelValue = document.getElementById('solar-panel-value').textContent;
-          const batteryValue = document.getElementById('battery-value').textContent;
-          const systemSizeValue = document.getElementById('system-size-value').textContent;
+          
+          // Get result values, ensuring we get the text content even with the new HTML structure
+          const solarPanelEl = document.getElementById('solar-panel-value');
+          const batteryEl = document.getElementById('battery-value');
+          const systemSizeEl = document.getElementById('system-size-value');
+          
+          const solarPanelValue = solarPanelEl.querySelector('.result-value-text') ? 
+              solarPanelEl.querySelector('.result-value-text').textContent : 
+              solarPanelEl.textContent;
+              
+          const batteryValue = batteryEl.querySelector('.result-value-text') ? 
+              batteryEl.querySelector('.result-value-text').textContent : 
+              batteryEl.textContent;
+              
+          const systemSizeValue = systemSizeEl.querySelector('.result-value-text') ? 
+              systemSizeEl.querySelector('.result-value-text').textContent : 
+              systemSizeEl.textContent;
           
           // Get date information for the printed report
           const currentDate = new Date();

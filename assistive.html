@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solar Calculator - Simple Mode</title>
+  <title>Solar Calculator - Assistive Mode</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   <link rel="stylesheet" href="css/header-footer.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/quote-request.css" />
-  <link rel="stylesheet" href="css/simple-calculator.css" />
+  <link rel="stylesheet" href="css/assistive-calculator.css" />
 </head>
 
 <body>
@@ -26,7 +26,7 @@
 
   <!-- Title Bar -->
   <div class="title">
-    <h1>Solar Calculator - Simple</h1>
+    <h1>Solar Calculator - Assistive</h1>
     <p class="subtitle">Find the right solar system for your home</p>
     <div class="audio-controls">
       <div class="audio-controls-header">
@@ -68,7 +68,7 @@
   <div class="tutorial-overlay simple-mode" id="tutorialOverlay">
     <div class="tutorial-container">
       <div class="tutorial-header">
-        <h3>How to Use the Simple Calculator</h3>
+        <h3>How to Use the Assistive Calculator</h3>
         <button class="tutorial-close" id="closeTutorialBtn">&times;</button>
       </div>
       <div class="tutorial-content">
@@ -90,11 +90,11 @@
   <!-- Mode Selector -->
   <div class="mode-switch-container">
     <div class="mode-switch">
-      <div class="mode-option active" data-mode="simple">
-        <i class="fas fa-smile"></i> <span>Simple Mode</span>
+      <div class="mode-option active" data-mode="assistive">
+        <i class="fas fa-smile"></i> <span>Assistive Mode</span>
       </div>
-      <div class="mode-option" data-mode="basic">
-        <i class="fas fa-solar-panel"></i> <span>Basic Mode</span>
+      <div class="mode-option" data-mode="standard">
+        <i class="fas fa-solar-panel"></i> <span>Standard Mode</span>
       </div>
       <div class="mode-option" data-mode="advanced">
         <i class="fas fa-chart-line"></i> <span>Advanced Mode</span>
@@ -339,7 +339,9 @@
                 <img src="assets/solar-panel.png" alt="Solar Panels" class="result-icon">
               </div>
               <div class="result-name" id="result-solar-panels">Solar Panels</div>
-              <div class="result-value" id="solar-panel-value">...</div>
+              <div class="result-value" id="solar-panel-value">
+                <span class="result-value-text">...</span>
+              </div>
               <div class="result-description" id="solar-panel-desc">These capture sunlight to power your home</div>
             </div>
             
@@ -348,7 +350,9 @@
                 <img src="assets/battery-capacity.png" alt="Battery" class="result-icon">
               </div>
               <div class="result-name" id="result-battery">Battery</div>
-              <div class="result-value" id="battery-value">...</div>
+              <div class="result-value" id="battery-value">
+                <span class="result-value-text">...</span>
+              </div>
               <div class="result-description" id="battery-desc">Stores energy for use when there's no sun</div>
             </div>
             
@@ -357,7 +361,9 @@
                 <img src="assets/inverter.png" alt="System Size" class="result-icon">
               </div>
               <div class="result-name" id="result-system-size">System Size</div>
-              <div class="result-value" id="system-size-value">...</div>
+              <div class="result-value" id="system-size-value">
+                <span class="result-value-text">...</span>
+              </div>
               <div class="result-description" id="system-size-desc">Powers all your selected appliances</div>
             </div>
           </div>
@@ -401,18 +407,17 @@
   <!-- Audio Elements for VoiceOver -->
   <audio id="audio-player" src=""></audio>
 
-  <!-- JavaScript Files -->
-  <script src="js/layout.js"></script>
-  <script src="js/appliance.js"></script>
-  <script src="js/quote-request.js"></script>
-  <script src="js/simple-calculator.js"></script>
+  <!-- Scripts -->
+  <script src="js/layout.js" defer></script>
+  <script src="js/appliance.js" defer></script>
+  <script src="js/quote-request.js" defer></script>
+  <script src="js/assistive-calculator.js"></script>
   
-  <!-- Initialize the appliance grid with 'simple' mode when page loads -->
+  <!-- Initialize the appliance grid with 'assistive' mode when page loads -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Load appliances grid with simple mode
       if (window.AppliancesModule && typeof window.AppliancesModule.loadAppliancesGrid === 'function') {
-        window.AppliancesModule.loadAppliancesGrid('simple', 'appliance-grid-container');
+        window.AppliancesModule.loadAppliancesGrid('assistive', 'appliance-grid-container');
       }
     });
   </script>

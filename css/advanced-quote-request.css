@@ -671,6 +671,12 @@
   
   /* Responsive styles */
   @media (max-width: 768px) {
+    .quote-request-floating-btn{
+      bottom: 15px;
+      right: 15px;
+      padding: 10px 15px;;
+    }
+
     .quote-request-container {
       width: 95%;
       max-height: 95vh;

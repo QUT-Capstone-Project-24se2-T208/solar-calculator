@@ -379,23 +379,23 @@
   transform-origin: left;
 }
 
-.mode-button.simple {
+.mode-button.assistive {
   background-color: #3498db;
   box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
 
-.mode-button.simple:hover {
+.mode-button.assistive:hover {
   background-color: #2980b9;
   transform: translateY(-3px);
   box-shadow: 0 7px 20px rgba(52, 152, 219, 0.5);
 }
 
-.mode-button.basic {
+.mode-button.standard {
   background-color: #3498db;
   box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
 
-.mode-button.basic:hover {
+.mode-button.standard:hover {
   background-color: #2980b9;
   transform: translateY(-3px);
   box-shadow: 0 7px 20px rgba(52, 152, 219, 0.5);

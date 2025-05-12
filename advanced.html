@@ -49,12 +49,12 @@
   </div>
 
   <!-- Tutorial Button -->
-  <button class="open-tutorial-btn" id="openTutorialBtn" style="display: none;">
+  <button class="open-tutorial-btn" id="openTutorialBtn">
     <i class="fas fa-play-circle"></i>
   </button>
 
   <!-- Video Tutorial Popup -->
-  <div class="tutorial-overlay advanced-mode" id="tutorialOverlay" style="display: none;">
+  <div class="tutorial-overlay advanced-mode" id="tutorialOverlay">
     <div class="tutorial-container">
       <div class="tutorial-header">
         <h3>How to Use the Advanced Calculator</h3>
@@ -76,16 +76,17 @@
     </div>
   </div>
 
+  <!-- Mode Selector -->
   <div class="mode-switch-container">
     <div class="mode-switch">
-      <div class="mode-option" data-mode="simple">
-        <i class="fas fa-smile"></i> Simple Mode
+      <div class="mode-option" data-mode="assistive">
+        <i class="fas fa-smile"></i> <span>Assistive Mode</span>
       </div>
-      <div class="mode-option active" data-mode="basic">
-        <i class="fas fa-solar-panel"></i> Basic Mode
+      <div class="mode-option" data-mode="standard">
+        <i class="fas fa-solar-panel"></i> <span>Standard Mode</span>
       </div>
-      <div class="mode-option" data-mode="advanced">
-        <i class="fas fa-chart-line"></i> Advanced Mode
+      <div class="mode-option active" data-mode="advanced">
+        <i class="fas fa-chart-line"></i> <span>Advanced Mode</span>
       </div>
       <div class="mode-slider"></div>
     </div>

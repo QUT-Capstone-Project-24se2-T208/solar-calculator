@@ -1,3 +1,7 @@
+/**
+ * Standard Mode Calculator
+ * Handles the standard calculator functionality with appliance-based energy calculations.
+ */
 document.addEventListener("DOMContentLoaded", function() {
   // Add CSS for the highlight effect
   const style = document.createElement('style');
@@ -243,42 +247,42 @@ document.addEventListener("DOMContentLoaded", function() {
     if (inverterKW <= 0) {
       inverterText = "0kVA Inverter";
     } else if (inverterKW < 3) {
-      inverterText = "3kVA Inverter";
+      inverterText = "2 - 3kVA Inverter";
     } else if (inverterKW < 5) {
-      inverterText = "5kVA Inverter";
+      inverterText = "4 - 5kVA Inverter";
     } else if (inverterKW < 8) {
-      inverterText = "8kVA Inverter";
+      inverterText = "6 - 8kVA Inverter";
     } else if (inverterKW < 12) {
-      inverterText = "15kVA Inverter";
+      inverterText = "10 - 15kVA Inverter";
     } else if (inverterKW < 16) {
-      inverterText = "2x10kVA Inverter";
+      inverterText = "2x8 - 10kVA Inverter";
     } else if (inverterKW < 23) {
-      inverterText = "2x15kVA Inverter";
+      inverterText = "2x12 - 15kVA Inverter";
     } else {
       inverterText = "Custom Solution Required";
     }
     document.getElementById('inverter-size').textContent = inverterText;
     
     // Determine the appropriate solar panel size based on solarKW
-    let solarText = "0W";
+    let solarText = "0kW";
     if (solarKW > 0 && solarKW < 2) {
-      solarText = "6 x 275W";
+      solarText = "1 - 1.65kW (4-6 panels)";
     } else if (solarKW < 3) {
-      solarText = "9 x 275W";
+      solarText = "1.9 - 2.5kW (7-9 panels)";
     } else if (solarKW < 5) {
-      solarText = "10 x 390W";
+      solarText = "3.1 - 3.9kW (8-10 panels)";
     } else if (solarKW < 6) {
-      solarText = "15 x 370W";
+      solarText = "4.4 - 5.6kW (12-15 panels)";
     } else if (solarKW < 8) {
-      solarText = "18 x 390W";
+      solarText = "5.9 - 7.0kW (15-18 panels)";
     } else if (solarKW < 10) {
-      solarText = "25 x 390W";
+      solarText = "7.8 - 9.8kW (20-25 panels)";
     } else if (solarKW < 14) {
-      solarText = "35 x 390W";
+      solarText = "11.7 - 13.7kW (30-35 panels)";
     } else if (solarKW < 19) {
-      solarText = "50 x 370W";
+      solarText = "14.8 - 18.5kW (40-50 panels)";
     } else if (solarKW >= 19) {
-      solarText = "50+ Panels";
+      solarText = "18.5kW+ (50+ panels)";
     }
     document.getElementById('solar-panel-size').textContent = solarText;
     

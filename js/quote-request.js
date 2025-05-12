@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Detect which calculator mode we're in
-    const isSimpleMode = document.querySelector('.mode-option[data-mode="simple"].active') !== null;
-    const isBasicMode = document.querySelector('.mode-option[data-mode="basic"].active') !== null;
+    const isAssistiveMode = document.querySelector('.mode-option[data-mode="assistive"].active') !== null;
+    const isStandardMode = document.querySelector('.mode-option[data-mode="standard"].active') !== null;
     
     // DOM Elements - Common
     // Change from const to let for floatingBtn because we reassign it in init()
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Constants
     const API_ENDPOINT = 'https://solar-calculator-backend.onrender.com/api/send-quote-request';
-    const RESULTS_SECTION_ID = isSimpleMode ? 'step-3' : null; // Only used in simple mode
+    const RESULTS_SECTION_ID = isAssistiveMode ? 'step-3' : null; // Only used in assistive mode
     const SCROLL_THRESHOLD = 300; // Pixels from the top of results to show the button
     
     // Check if the modal exists, create it if not
@@ -249,9 +249,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.insertAdjacentHTML('beforeend', btnHTML);
     }
     
-    // Function to create a blur overlay for basic mode
-    function addBlurOverlayToBasicMode() {
-      if (!isBasicMode) return;
+    // Function to create a blur overlay for standard mode
+    function addBlurOverlayToStandardMode() {
+      if (!isStandardMode) return;
       
       const resultsGrid = document.querySelector('.results-grid');
       if (!resultsGrid) return;
@@ -294,9 +294,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return `image_${timestamp}_${randomString}${extension}`;
     }
     
-    // Show/hide floating button based on scroll position (for Simple mode)
+    // Show/hide floating button based on scroll position (for Assistive mode)
     function handleScroll() {
-        if (!isSimpleMode || !floatingBtn) return;
+        if (!isAssistiveMode || !floatingBtn) return;
         
         const resultsSection = document.getElementById(RESULTS_SECTION_ID);
         
@@ -341,12 +341,25 @@ document.addEventListener('DOMContentLoaded', function() {
             let solarPanelValue, batteryValue, systemSizeValue, totalKwhValue;
             
             // Get values based on the active mode
-            if (isSimpleMode) {
-                solarPanelValue = document.getElementById('solar-panel-value').textContent;
-                batteryValue = document.getElementById('battery-value').textContent;
-                systemSizeValue = document.getElementById('system-size-value').textContent;
+            if (isAssistiveMode) {
+                const solarPanelEl = document.getElementById('solar-panel-value');
+                const batteryEl = document.getElementById('battery-value');
+                const systemSizeEl = document.getElementById('system-size-value');
+                
+                solarPanelValue = solarPanelEl.querySelector('.result-value-text') ? 
+                    solarPanelEl.querySelector('.result-value-text').textContent : 
+                    solarPanelEl.textContent;
+                    
+                batteryValue = batteryEl.querySelector('.result-value-text') ? 
+                    batteryEl.querySelector('.result-value-text').textContent : 
+                    batteryEl.textContent;
+                    
+                systemSizeValue = systemSizeEl.querySelector('.result-value-text') ? 
+                    systemSizeEl.querySelector('.result-value-text').textContent : 
+                    systemSizeEl.textContent;
+                    
                 totalKwhValue = document.getElementById('total-kwh-value').textContent;
-            } else if (isBasicMode) {
+            } else if (isStandardMode) {
                 solarPanelValue = document.getElementById('solar-panel-size').textContent;
                 batteryValue = document.getElementById('battery-capacity').textContent;
                 systemSizeValue = document.getElementById('inverter-size').textContent;
@@ -601,6 +614,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Create a fresh FormData object
                 const formData = new FormData();
                 
+                // Add current calculator mode explicitly
+                formData.append('calculator-mode', isAssistiveMode ? 'assistive' : isStandardMode ? 'standard' : 'unknown');
+                
                 // Add form fields
                 const inputs = this.querySelectorAll('input:not([type="file"]), select, textarea');
                 inputs.forEach(input => {
@@ -659,8 +675,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     quoteForm.reset();
                     imagePreviewArea.innerHTML = '';
                     
-                    // For basic mode: Remove the blur overlay to reveal results
-                    if (isBasicMode) {
+                    // For standard mode: Remove the blur overlay to reveal results
+                    if (isStandardMode) {
                         const blurOverlay = document.querySelector('.results-grid .results-blur-overlay');
                         if (blurOverlay) {
                             blurOverlay.classList.add('fade-out');
@@ -686,9 +702,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add Quote Request button to navigation buttons (for Simple mode)
+    // Add Quote Request button to navigation buttons (for Assistive mode)
     function addQuoteRequestButton() {
-        if (!isSimpleMode) return;
+        if (!isAssistiveMode) return;
         
         // Find the navigation buttons container in step 3
         const navButtons = document.querySelector('#step-3 .navigation-buttons');
@@ -746,8 +762,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize the quote request functionality based on mode
     function init() {
-        // Check if we need to create floating button for Simple mode
-        if (isSimpleMode && !floatingBtn) {
+        // Check if we need to create floating button for Assistive mode
+        if (isAssistiveMode && !floatingBtn) {
             ensureFloatingButtonExists();
             
             // Update the floatingBtn reference
@@ -769,9 +785,9 @@ document.addEventListener('DOMContentLoaded', function() {
             addQuoteRequestButton();
         }
         
-        // For Basic mode, add blur overlay to system requirements
-        if (isBasicMode) {
-            addBlurOverlayToBasicMode();
+        // For Standard mode, add blur overlay to system requirements
+        if (isStandardMode) {
+            addBlurOverlayToStandardMode();
             
             // Add Print This Page button during initialization
             initPrintButton();
@@ -783,7 +799,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Setup the new quote button listener
         setupQuoteButtonListener();
         
-        console.log(`Quote request initialized in ${isSimpleMode ? 'Simple' : isBasicMode ? 'Basic' : 'Unknown'} mode`);
+        console.log(`Quote request initialized in ${isAssistiveMode ? 'Assistive' : isStandardMode ? 'Standard' : 'Unknown'} mode`);
     }
     
     // Delay initialization slightly to ensure DOM is fully ready
@@ -820,7 +836,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check if a quote has been requested (check if blur overlay is removed)
             const blurOverlay = document.querySelector('.results-grid .results-blur-overlay');
             
-            if (blurOverlay && isBasicMode) {
+            if (blurOverlay && isStandardMode) {
                 // Show popup message
                 showQuoteRequestPrompt();
             } else {
@@ -899,7 +915,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize the Print This Page button during page load
     function initPrintButton() {
-        if (isBasicMode) {
+        if (isStandardMode) {
             // Find the advanced mode button
             const advancedModeBtn = document.querySelector('.advanced-mode-btn');
             if (advancedModeBtn && !document.getElementById('print-page-btn')) {

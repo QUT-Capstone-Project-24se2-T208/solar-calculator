@@ -178,7 +178,7 @@ body {
   
   .mode-slider {
     position: absolute;
-    left: 33.33%; /* Start at basic mode */
+    left: 33.33%; /* Start at assistive mode */
     width: 33.33%;
     height: 100%;
     background: linear-gradient(45deg, #3498db, #2980b9);
@@ -418,12 +418,14 @@ body {
   cursor: pointer;
   z-index: 999;
   transition: all 0.2s ease;
+  animation: pulse 2s infinite;
 }
 
 .open-tutorial-btn:hover {
   background-color: #2980b9;
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  animation: none;
 }
 
 .open-tutorial-btn i {
@@ -433,53 +435,66 @@ body {
 /* Tutorial Tooltip */
 .tutorial-tooltip {
   position: absolute;
-  right: -120px;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #333;
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 14px;
   white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.open-tutorial-btn:hover .tutorial-tooltip {
+  display: block;
   opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .tutorial-tooltip:after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: -6px;
-  margin-top: -6px;
-  border-width: 6px 6px 6px 0;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
   border-style: solid;
-  border-color: transparent #333 transparent transparent;
+  border-color: #333 transparent transparent transparent;
 }
 
-/* Simple Mode Colors */
-.simple-mode .tutorial-header,
-.simple-mode .tutorial-button,
-.simple-mode .open-tutorial-btn {
+/* 펄스 애니메이션 추가 */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+/* Assistive Mode Colors */
+.assistive-mode .tutorial-header,
+.assistive-mode .tutorial-button,
+.assistive-mode .open-tutorial-btn {
   background-color: #3498db;
 }
 
-.simple-mode .tutorial-button:hover,
-.simple-mode .open-tutorial-btn:hover {
+.assistive-mode .tutorial-button:hover,
+.assistive-mode .open-tutorial-btn:hover {
   background-color: #2980b9;
 }
 
-/* Basic Mode Colors */
-.basic-mode .tutorial-header,
-.basic-mode .tutorial-button,
-.basic-mode .open-tutorial-btn {
+/* Standard Mode Colors */
+.standard-mode .tutorial-header,
+.standard-mode .tutorial-button,
+.standard-mode .open-tutorial-btn {
   background-color: #3498db;
 }
 
-.basic-mode .tutorial-button:hover,
-.basic-mode .open-tutorial-btn:hover {
+.standard-mode .tutorial-button:hover,
+.standard-mode .open-tutorial-btn:hover {
   background-color: #2980b9;
 }
 
@@ -502,11 +517,21 @@ body {
   }
   
   .open-tutorial-btn {
-    padding: 0;
     width: 45px;
     height: 45px;
     bottom: 15px;
     left: 15px;
+    padding: 0;
+  }
+  
+  .open-tutorial-btn i {
+    font-size: 20px;
+  }
+  
+  .tutorial-tooltip {
+    font-size: 10px;
+    padding: 5px 5px;
+    top: -30px;
   }
   
   .tutorial-header h3 {

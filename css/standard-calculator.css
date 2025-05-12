@@ -188,7 +188,7 @@
   }
   
   .result-value {
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 600;
     color: #2c3e50;
   }
@@ -630,6 +630,7 @@
     .quote-request-floating-btn-2{
       bottom: 15px;
       right: 15px;
+      padding: 12px 15px;
     }
 
     .quote-button-box{

@@ -1,5 +1,5 @@
 /**
- * Shared appliances data module for both Simple and Basic calculator modes
+ * Shared appliances data module for both Assistive and Standard calculator modes
  * This file contains the common appliance data and functions to generate the appliance grid
  */
 
@@ -253,22 +253,26 @@ const appliancesData = [
 let customApplianceCount = 0;
 
 /**
- * Generate the appliance grid HTML for a specific mode
- * @param {string} mode - 'simple' or 'basic'
- * @param {string} containerId - ID of the container element
+ * Loads the appliances grid in the specified container
+ * @param {string} mode - 'assistive' or 'standard'
+ * @param {string} containerId - The ID of the container to load the grid into
  */
 function loadAppliancesGrid(mode, containerId) {
   const container = document.getElementById(containerId);
+  let appliances;
+  
+  // Filter appliances based on mode
+  if (mode === 'assistive') {
+    appliances = appliancesData.filter(appliance => !appliance.modeStandard);
+  } else {
+    // Default to all appliances for basic mode
+    appliances = appliancesData;
+  }
+  
   if (!container) return;
   
   // Clear the container
   container.innerHTML = '';
-  
-  // Filter appliances based on mode
-  let appliances = appliancesData;
-  if (mode === 'simple') {
-    appliances = appliancesData.filter(appliance => !appliance.modeBasic);
-  }
   
   // Create the master "Add Custom Appliance" card
   const customTemplateIndex = appliances.findIndex(appliance => appliance.isCustom);

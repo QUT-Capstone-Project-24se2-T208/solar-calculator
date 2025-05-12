@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentPage = currentPath.substring(currentPath.lastIndexOf('/') + 1);
     
     // Set correct position for the slider based on current page
-    if (currentPage.includes('simple')) {
-      // Set Simple mode as active
+    if (currentPage.includes('assistive')) {
+      // Set Assistive mode as active
       modeOptions.forEach(option => {
         option.classList.remove('active');
-        if (option.getAttribute('data-mode') === 'simple') {
+        if (option.getAttribute('data-mode') === 'assistive') {
           option.classList.add('active');
         }
       });
@@ -63,10 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
       modeSlider.style.left = '66.66%';
     }
     else {
-      // Default to Basic mode
+      // Default to Standard mode
       modeOptions.forEach(option => {
         option.classList.remove('active');
-        if (option.getAttribute('data-mode') === 'basic') {
+        if (option.getAttribute('data-mode') === 'standard') {
           option.classList.add('active');
         }
       });
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Click handler for mode options
     modeOptions.forEach(option => {
       option.addEventListener('click', function() {
-        const mode = this.getAttribute('data-mode');
+        const mode = this.dataset.mode;
         updateModeSelection(mode);
       });
     });
@@ -96,17 +96,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     // Move slider
-    if (mode === 'simple') {
+    if (mode === 'assistive') {
       modeSlider.style.left = '0';
-      // Redirect after header/footer has time to load (increased timeout)
-      setTimeout(() => { window.location.href = 'simple.html'; }, 1000);
-    } else if (mode === 'basic') {
+      // Redirect after animation has time to complete (1 second)
+      setTimeout(() => { window.location.href = 'assistive.html'; }, 1000);
+    } else if (mode === 'standard') {
       modeSlider.style.left = '33.33%';
-      // Redirect to basic mode
-      setTimeout(() => { window.location.href = 'basic.html'; }, 1000);
+      // Redirect to standard mode
+      setTimeout(() => { window.location.href = 'standard.html'; }, 1000);
     } else if (mode === 'advanced') {
       modeSlider.style.left = '66.66%';
-      // Redirect after header/footer has time to load (increased timeout)
+      // Redirect after animation has time to complete (1 second)
       setTimeout(() => { window.location.href = 'advanced.html'; }, 1000);
     }
   }
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const swipeDistance = touchEndX - touchStartX;
     
     // Get current active mode
-    let currentMode = 'basic';
+    let currentMode = 'standard';
     modeOptions.forEach(option => {
       if (option.classList.contains('active')) {
         currentMode = option.getAttribute('data-mode');
@@ -140,14 +140,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Determine direction and mode change
     if (swipeDistance > 50) { // Right swipe
       if (currentMode === 'advanced') {
-        updateModeSelection('basic');
-      } else if (currentMode === 'basic') {
-        updateModeSelection('simple');
+        updateModeSelection('standard');
+      } else if (currentMode === 'standard') {
+        updateModeSelection('assistive');
       }
     } else if (swipeDistance < -50) { // Left swipe
-      if (currentMode === 'simple') {
-        updateModeSelection('basic');
-      } else if (currentMode === 'basic') {
+      if (currentMode === 'assistive') {
+        updateModeSelection('standard');
+      } else if (currentMode === 'standard') {
         updateModeSelection('advanced');
       }
     }
@@ -284,23 +284,23 @@ function initializeHeaderMenu() {
 document.addEventListener('DOMContentLoaded', function() {
   // Tutorial video configuration - Configure separate video IDs for mobile and desktop
   const tutorialVideos = {
-    simple: {
-      mobile: "lhw5YGYhxis", // Simple mode tutorial for mobile (replace with actual ID)
-      desktop: "BxT49DV04SE"  // Simple mode tutorial for desktop (replace with actual ID)
+    assistive: {
+      mobile: "td_aGcI5N0E", 
+      desktop: "BeVBQLOzAh4" 
     },
-    basic: {
-      mobile: "Rt-xUpBdr-g",  // Basic mode tutorial for mobile (replace with actual ID)
-      desktop: "7eBTbo7CIUk"   // Basic mode tutorial for desktop (replace with actual ID)
+    standard: {
+      mobile: "aMaCDWhZ7JE", 
+      desktop: "aMp8rzCm8Mc"  
     },
     advanced: {
-      mobile: "qdiyx_YE6RI", // No tutorial video for advanced mode
-      desktop: "ojDNI-vvPHs"
+      mobile: "PO6DQTnPZ6g",
+      desktop: "3kAm4iaYDt4"
     }
   };
 
   // Determine which calculator page we're on
-  const isSimplePage = window.location.pathname.includes("simple.html");
-  const isBasicPage = window.location.pathname.includes("basic.html");
+  const isAssistivePage = window.location.pathname.includes("assistive.html");
+  const isStandardPage = window.location.pathname.includes("standard.html");
   const isAdvancedPage = window.location.pathname.includes("advanced.html");
   
   // Elements
@@ -313,25 +313,18 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Only proceed if we're on a calculator page with tutorial elements
   if (tutorialOverlay && tutorialVideo && openTutorialBtn) {
-    // Enable tutorial for all modes including advanced mode
-    if (isAdvancedPage) {
-      // Make sure the tutorial button and overlay are visible in advanced mode
-      openTutorialBtn.style.display = 'flex';
-      tutorialOverlay.style.display = 'flex';
-    }
-    
     // Select mobile or desktop video based on screen size
     let isMobile = window.innerWidth <= 768;
     let videoType = isMobile ? 'mobile' : 'desktop';
     let videoId;
     let storageKey = '';
     
-    if (isSimplePage) {
-      videoId = tutorialVideos.simple[videoType];
-      storageKey = 'simpleTutorialShown';
-    } else if (isBasicPage) {
-      videoId = tutorialVideos.basic[videoType];
-      storageKey = 'basicTutorialShown';
+    if (isAssistivePage) {
+      videoId = tutorialVideos.assistive[videoType];
+      storageKey = 'assistiveTutorialShown';
+    } else if (isStandardPage) {
+      videoId = tutorialVideos.standard[videoType];
+      storageKey = 'standardTutorialShown';
     } else if (isAdvancedPage) {
       videoId = tutorialVideos.advanced[videoType];
       storageKey = 'advancedTutorialShown';
@@ -344,10 +337,10 @@ document.addEventListener('DOMContentLoaded', function() {
         isMobile = newIsMobile;
         videoType = isMobile ? 'mobile' : 'desktop';
         
-        if (isSimplePage) {
-          videoId = tutorialVideos.simple[videoType];
-        } else if (isBasicPage) {
-          videoId = tutorialVideos.basic[videoType];
+        if (isAssistivePage) {
+          videoId = tutorialVideos.assistive[videoType];
+        } else if (isStandardPage) {
+          videoId = tutorialVideos.standard[videoType];
         } else if (isAdvancedPage) {
           videoId = tutorialVideos.advanced[videoType];
         }
@@ -429,11 +422,5 @@ document.addEventListener('DOMContentLoaded', function() {
         hideTutorial();
       }
     });
-    
-    // Auto-show tutorial on first visit (if not opted out before)
-    if (!localStorage.getItem(storageKey) && videoId) {
-      // Delay showing tutorial by 1 second to let the page load first
-      setTimeout(showTutorial, 1000);
-    }
   }
 });
